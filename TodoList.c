@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MAX_NUM 100;
-#define MAX_LEN 128;
+#define MAX_NUM 100
+#define MAX_LEN 128 
 typedef struct TodoItem {
     char content[100];
     int done;
@@ -23,15 +23,19 @@ void show_menu() {
 }
 
 void add_todo (char *s) {
-    if (todo_cnt > MAX_NUM){
-        printf ("The memory if full!\n");
+    if (todo_cnt >= MAX_NUM){
+        printf ("The memory is full!\n");
         return;
     }
     
-    strcp (todos[todo_cnt].content,s);
+    strcpy (todos[todo_cnt].content,s);
     todos[todo_cnt].done = 0;
     todo_cnt++;
     printf ("ADD finished!");
+}
+
+void show_todo () {
+    
 }
 
 int main () {
@@ -40,8 +44,21 @@ int main () {
     while (1) {
         show_menu();
         scanf ("%d", &op);
-        
+        getchar();
+        if (op == 0){
+            break;
+        }
+        if (op == 1) {
+            printf ("Please input your task:");
+            fgets(buf,MAX_LEN,stdin);
+            buf[strcspn(buf,"\n")] = 0;
+            add_todo(buf);
+        }
+        else {
+            printf ("Please reinput!\n");
+        }
     }
+    return 0;
 }
 
 
