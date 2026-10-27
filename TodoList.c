@@ -34,8 +34,10 @@ void add_todo (char *s) {
     printf ("ADD finished!");
 }
 
-void show_todo () {
-    
+void show_todo (Todo todos[], int n) {
+    for (int i = 0;i < n;i++){
+        printf ("%d. %s\n", i+1, todos[i].content);
+    }
 }
 
 int main () {
@@ -48,11 +50,14 @@ int main () {
         if (op == 0){
             break;
         }
-        if (op == 1) {
+        else if (op == 1) {
             printf ("Please input your task:");
             fgets(buf,MAX_LEN,stdin);
             buf[strcspn(buf,"\n")] = 0;
             add_todo(buf);
+        }
+        else if (op == 2) {
+            show_todo (todos, todo_cnt);
         }
         else {
             printf ("Please reinput!\n");
